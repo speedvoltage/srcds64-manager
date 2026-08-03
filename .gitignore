@@ -1,0 +1,7 @@
+/build/
+/cmake-build-*/
+/dist/
+*.user
+*.tar.gz
+*.zip
+*.sha256

@@ -1,0 +1,49 @@
+name: Linux build
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            cmake \
+            ninja-build \
+            qt6-base-dev
+
+      - name: Check release metadata
+        run: ./scripts/check-release.sh
+
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Package Linux release
+        run: ./scripts/package-linux.sh build/srcds64
+
+      - name: Upload Linux release archive
+        uses: actions/upload-artifact@v7
+        with:
+          name: srcds64-manager-linux-x86_64
+          path: |
+            dist/srcds64-manager-1.0.0-linux-x86_64.tar.gz
+            dist/srcds64-manager-1.0.0-linux-x86_64.tar.gz.sha256
+          if-no-files-found: error

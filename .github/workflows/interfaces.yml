@@ -1,0 +1,62 @@
+name: Terminal and desktop interfaces
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install Qt runtime libraries
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libopengl0 libxkbcommon0
+      - name: Install interfaces and tests
+        run: python -m pip install -e ".[tui,gui,dev]"
+      - name: Test interfaces (no Steam downloads)
+        run: python -m pytest -q
+      - name: Build Python distributions
+        run: python -m build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: interfaces-${{ matrix.os }}-py${{ matrix.python }}
+          path: |
+            dist/*.whl
+            dist/*.tar.gz
+
+  portable-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Assemble portable Windows package
+        run: python scripts/package-windows.py
+      - name: Check the packaged runtime and interfaces
+        shell: pwsh
+        run: |
+          Expand-Archive dist/srcds64-manager-0.2.0-windows-x64.zip -DestinationPath portable
+          $app = "$PWD/portable/srcds64-manager-0.2.0-windows-x64"
+          & "$app/runtime/python.exe" "$app/app/launch.py" check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v7
+        with:
+          name: srcds64-manager-windows-x64-portable
+          path: |
+            dist/srcds64-manager-0.2.0-windows-x64.zip
+            dist/srcds64-manager-0.2.0-windows-x64.zip.sha256

@@ -1,5 +1,25 @@
 # SRCDS 64 Manager
 
+## New terminal and desktop interfaces
+
+The **Textual TUI** and **Qt desktop GUI** support Linux
+and Windows. Both provide game selection, installation previews, tool setup,
+fresh installation, verification, live output, and shared saved settings.
+Windows now includes a native Windows installer; WSL is not required. A portable
+Windows ZIP includes Python and both interfaces. See the short
+[Windows quick start](docs/WINDOWS_QUICK_START.txt).
+
+See [setup, screenshots, and remaining work](docs/INTERFACES.md).
+
+```sh
+python -m pip install -e '.[tui,gui]'
+srcds64-tui
+srcds64-gui
+```
+
+Linux uses the original C++ backend described below. Windows uses the bundled
+native backend and does not require a C++ build.
+
 SRCDS 64 Manager automatically creates fresh 64-bit Linux Source Dedicated Server installations.
 
 It installs the selected game through SteamCMD, obtains the small set of missing 64-bit runtime files from the Team Fortress 2 Linux server depot, creates the required library aliases, and verifies the finished server.

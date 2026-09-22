@@ -1,0 +1,5 @@
+include THIRD_PARTY_NOTICES.md
+include resources/games.json
+recursive-include docs *.md *.png *.svg *.txt
+recursive-include tests/interfaces *.py
+recursive-include scripts *.py *.lock *.ps1

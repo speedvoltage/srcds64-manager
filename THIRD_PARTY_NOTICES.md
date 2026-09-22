@@ -18,3 +18,16 @@ srcds64-manager can download SteamCMD from Valve's official Steam CDN when no us
 - Documentation: https://developer.valvesoftware.com/wiki/SteamCMD
 
 SteamCMD is not included in the srcds64-manager source or binary archives.
+
+
+## Portable Windows interfaces
+
+The portable ZIP also bundles the unmodified official CPython embeddable runtime,
+PySide6 Essentials / Qt, Shiboken6, Textual, and their Python dependencies.
+Versions and hashes are recorded in `scripts/requirements-windows.lock`.
+CPython's license is included under `runtime`; wheel license files and metadata
+are retained under `lib`. Qt/PySide6 LGPL license terms apply to the corresponding
+libraries; they remain separate replaceable files. Sources are available from
+https://code.qt.io/ and https://pypi.org/project/PySide6-Essentials/.
+
+SteamCMD and DepotDownloader are not bundled in the portable ZIP.

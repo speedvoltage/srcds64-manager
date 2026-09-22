@@ -1,0 +1,30 @@
+[
+  {
+    "id": "css",
+    "name": "Counter-Strike: Source",
+    "appId": 232330,
+    "gameDirectory": "cstrike",
+    "defaultMap": "de_dust2"
+  },
+  {
+    "id": "dods",
+    "name": "Day of Defeat: Source",
+    "appId": 232290,
+    "gameDirectory": "dod",
+    "defaultMap": "dod_anzio"
+  },
+  {
+    "id": "hl2dm",
+    "name": "Half-Life 2: Deathmatch",
+    "appId": 232370,
+    "gameDirectory": "hl2mp",
+    "defaultMap": "dm_lockdown"
+  },
+  {
+    "id": "hldm",
+    "name": "Half-Life Deathmatch: Source",
+    "appId": 255470,
+    "gameDirectory": "hl1mp",
+    "defaultMap": "crossfire"
+  }
+]

@@ -5,3 +5,9 @@
 *.tar.gz
 *.zip
 *.sha256
+/.venv/
+/.pytest_cache/
+__pycache__/
+*.egg-info/
+/build-python/
+/.local-backend/

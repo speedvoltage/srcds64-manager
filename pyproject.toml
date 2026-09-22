@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "srcds64-interfaces"
+version = "0.2.0"
+description = "Terminal and desktop interfaces for SRCDS 64 Manager"
+requires-python = ">=3.11"
+license = "MIT"
+readme = "docs/INTERFACES.md"
+
+[project.optional-dependencies]
+tui = ["textual>=1.0,<9"]
+gui = ["PySide6>=6.8,<7"]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.25,<2", "build>=1,<2"]
+
+[project.scripts]
+srcds64-windows = "srcds64_ui.windows_backend:main"
+srcds64-tui = "srcds64_ui.tui:main"
+
+[project.gui-scripts]
+srcds64-gui = "srcds64_ui.gui:main"
+
+[tool.setuptools.packages.find]
+where = ["interfaces/src"]
+
+[tool.setuptools.package-data]
+srcds64_ui = ["games.json", "assets/*.svg", "assets/*.png", "assets/*.ico"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/interfaces"]
+asyncio_mode = "auto"

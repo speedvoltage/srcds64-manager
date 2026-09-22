@@ -6,7 +6,7 @@ from pathlib import Path
 from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QCloseEvent, QIcon, QTextCursor
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFileDialog,
-                              QFormLayout, QGridLayout, QLabel, QLineEdit,
+                              QFormLayout, QGridLayout, QLabel, QLayout, QLineEdit,
                               QMainWindow, QMessageBox, QPlainTextEdit, QPushButton,
                               QScrollArea, QSplitter, QVBoxLayout, QWidget)
 
@@ -34,6 +34,11 @@ class ManagerWindow(QMainWindow):
         root = QWidget()
         self.setCentralWidget(root)
         layout = QVBoxLayout(root)
+        # The wide layout's minimum width must not prevent the resize event
+        # that switches to the compact layout (notably with Windows fonts).
+        layout.setSizeConstraint(QLayout.SizeConstraint.SetNoConstraint)
+        self.layout().setSizeConstraint(QLayout.SizeConstraint.SetNoConstraint)
+        self.setMinimumSize(360, 400)
         title = QLabel("SRCDS 64 Manager")
         title.setStyleSheet("font-size: 26px; font-weight: 600; padding: 8px 0;")
         layout.addWidget(title)

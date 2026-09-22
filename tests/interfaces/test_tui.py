@@ -29,11 +29,18 @@ async def test_install_requires_confirmation_and_back_does_nothing(fake_backend)
     app = ManagerApp(Settings())
     async with app.run_test(size=(100, 35)) as pilot:
         await pilot.click("#install")
+        await pilot.pause()
         assert isinstance(app.screen, ConfirmInstall)
         assert app.job is None
         await pilot.click("#back")
+        await pilot.pause()
+        assert not isinstance(app.screen, ConfirmInstall)
         assert app.job is None
+        # Textual ignores another click during a button's active effect.
+        await pilot.pause(app.query_one("#install", Button).active_effect_duration)
         await pilot.click("#install")
+        await pilot.pause()
+        assert isinstance(app.screen, ConfirmInstall)
         await pilot.click("#confirm")
         await wait_for_job(pilot, app)
         assert "Completed successfully" in str(app.query_one("#status", Static).render())

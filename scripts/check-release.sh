@@ -45,9 +45,6 @@ required = {
     'CONTRIBUTING.md',
     'LICENSE',
     'THIRD_PARTY_NOTICES.md',
-    'docs/GITHUB_RELEASE.md',
-    'docs/RELEASE_NOTES_1.0.0.md',
-    'docs/TESTING.md',
 }
 missing = sorted(path for path in required if not (root / path).is_file())
 if missing:

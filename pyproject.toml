@@ -8,7 +8,7 @@ version = "0.2.0"
 description = "Terminal and desktop interfaces for SRCDS 64 Manager"
 requires-python = ">=3.11"
 license = "MIT"
-readme = "docs/INTERFACES.md"
+readme = "README.md"
 
 [project.optional-dependencies]
 tui = ["textual>=1.0,<9"]

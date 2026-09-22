@@ -56,7 +56,7 @@ def main():
         shutil.copy(ROOT / "scripts/windows/create-shortcuts.ps1", package / "Create shortcuts.ps1")
         for filename in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
             shutil.copy(ROOT / filename, package / filename)
-        shutil.copy(ROOT / "docs/WINDOWS_QUICK_START.txt", package / "START HERE.txt")
+        shutil.copy(ROOT / "README.md", package / "README.md")
         shutil.copy(ROOT / "scripts/requirements-windows.lock", package / "DEPENDENCIES.txt")
         launchers = {
             "Create desktop shortcuts.cmd": '@echo off\npowershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0Create shortcuts.ps1"\npause\n',

@@ -6,10 +6,8 @@ The **Textual TUI** and **Qt desktop GUI** support Linux
 and Windows. Both provide game selection, installation previews, tool setup,
 fresh installation, verification, live output, and shared saved settings.
 Windows now includes a native Windows installer; WSL is not required. A portable
-Windows ZIP includes Python and both interfaces. See the short
-[Windows quick start](docs/WINDOWS_QUICK_START.txt).
-
-See [setup, screenshots, and remaining work](docs/INTERFACES.md).
+Windows ZIP includes Python and both interfaces. Extract the ZIP and run
+`Open GUI.cmd` or `Open TUI.cmd`. Administrator rights are not required.
 
 ```sh
 python -m pip install -e '.[tui,gui]'
